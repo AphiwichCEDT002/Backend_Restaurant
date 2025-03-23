@@ -10,12 +10,22 @@ dotenv.config({path:'./config/config.env'});
 
 connectDB();
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://thorn-mod-restaurant.vercel.app'
+];
+
 const app = express();
 const restaurants = require('./routes/restaurants');
 const auth = require('./routes/auth');
 const reservation = require('./routes/reservation');
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests only from your frontend (adjust if needed)
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }}, // Allow requests only from your frontend (adjust if needed)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow necessary HTTP methods
   credentials: true, // If you use cookies or authentication, include credentials
 }));
@@ -51,7 +61,7 @@ const swaggerOptions = {
       },
       servers: [
         {
-          url: "http://localhost:5000/api/v1",
+          url: "https://thorn-mod-restaurant.vercel.app/api/v1",
         },
       ],
       components: {
