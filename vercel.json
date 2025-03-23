@@ -1,17 +1,20 @@
 {
-    "version": 2,
-    "name": "restaurant_reservation",
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "server.js"
-      }
-    ]
+  "version": 2,
+  "name": "restaurant_reservation",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ],
+  "env": {
+    
+    "NEXT_PUBLIC_BACKEND_URL": "https://backend-restauranttrue-bbcwpiasw-clouds-projects-94ed8ec9.vercel.app"
   }
-  
+}
