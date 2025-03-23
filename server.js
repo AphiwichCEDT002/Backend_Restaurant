@@ -15,7 +15,7 @@ const restaurants = require('./routes/restaurants');
 const auth = require('./routes/auth');
 const reservation = require('./routes/reservation');
 app.use(cors({
-  origin: 'https://backend-restauranttrue-bbcwpiasw-clouds-projects-94ed8ec9.vercel.app', // Allow requests only from your frontend (adjust if needed)
+  origin: 'https://thorn-mod-restaurant-c69yrtw96-clouds-projects-94ed8ec9.vercel.app/', // Allow requests only from your frontend (adjust if needed)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow necessary HTTP methods
   credentials: true, // If you use cookies or authentication, include credentials
 }));
