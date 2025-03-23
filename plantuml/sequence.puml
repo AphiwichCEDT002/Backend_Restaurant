@@ -1,0 +1,49 @@
+' == Create Hospital (POST) ==
+' client -> server ++ : POST /api/v1/hospitals
+' server -> routerHospitals ++ : app.use('/api/v1/hospitals', hospitals)
+' routerHospitals -> controllersHospitals ++ : createHospital(req, res)
+' controllersHospitals -> modelHospital ++ : create(req.body)
+' modelHospital -> HospitalsDatabase ++ : Save HospitalSchema
+' HospitalsDatabase --> modelHospital -- : Return saved hospital data
+' modelHospital --> controllersHospitals -- : hospital
+' controllersHospitals --> client -- : JSON Response (success/failure)
+
+' == Get All Hospitals (GET) ==
+client -> server ++ : GET /api/v1/hospitals
+server -> routerHospitals ++ : app.use('/api/v1/hospitals', hospitals)
+routerHospitals -> controllersHospitals ++ : getHospitals()
+controllersHospitals -> modelHospital ++ : find({})
+' modelHospital -> HospitalsDatabase ++ : Query all hospitals
+' HospitalsDatabase --> modelHospital -- : Return hospital list
+' modelHospital --> controllersHospitals -- : hospitalList
+' controllersHospitals --> client -- : JSON Response (hospitalList)
+
+== Get Single Hospital (GET by ID) ==
+client -> server ++ : GET /api/v1/hospitals/:id
+server -> routerHospitals ++ : app.use('/api/v1/hospitals', hospitals)
+routerHospitals -> controllersHospitals ++ : getHospital(req.params.id)
+controllersHospitals -> modelHospital ++ : findById(req.params.id)
+modelHospital -> HospitalsDatabase ++ : Query hospital by ID
+HospitalsDatabase --> modelHospital -- : Return hospital data
+modelHospital --> controllersHospitals -- : hospital
+controllersHospitals --> client -- : JSON Response (hospital)
+
+' == Update Hospital (PUT) ==
+client -> server ++ : PUT /api/v1/hospitals/:id
+server -> routerHospitals ++ : app.use('/api/v1/hospitals', hospitals)
+routerHospitals -> controllersHospitals ++ : updateHospital(req.params.id, req.body)
+controllersHospitals -> modelHospital ++ : findByIdAndUpdate(req.params.id, req.body)
+' modelHospital -> HospitalsDatabase ++ : Update hospital record
+' HospitalsDatabase --> modelHospital -- : Return updated hospital data
+' modelHospital --> controllersHospitals -- : updatedHospital
+' controllersHospitals --> client -- : JSON Response (updatedHospital)
+
+== Delete Hospital (DELETE) ==
+client -> server ++ : DELETE /api/v1/hospitals/:id
+server -> routerHospitals ++ : app.use('/api/v1/hospitals', hospitals)
+routerHospitals -> controllersHospitals ++ : deleteHospital(req.params.id)
+controllersHospitals -> modelHospital ++ : findByIdAndDelete(req.params.id)
+modelHospital -> HospitalsDatabase ++ : Remove hospital record
+HospitalsDatabase --> modelHospital -- : Confirmation
+modelHospital --> controllersHospitals -- : success message
+controllersHospitals --> client -- : JSON Response (success)
