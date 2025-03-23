@@ -21,14 +21,19 @@ const auth = require('./routes/auth');
 const reservation = require('./routes/reservation');
 app.use(cors({
   origin: function (origin, callback) {
+    console.log("🔍 Request from origin:", origin);
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error("❌ Not allowed by CORS:", origin);
       callback(new Error('Not allowed by CORS'));
-    }}, // Allow requests only from your frontend (adjust if needed)
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow necessary HTTP methods
-  credentials: true, // If you use cookies or authentication, include credentials
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 }));
+
+app.options('*', cors());
 app.use(express.json());
 app.use(cookieParser());
 
