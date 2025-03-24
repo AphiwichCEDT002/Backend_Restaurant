@@ -14,23 +14,13 @@ const app = express();
 const restaurants = require('./routes/restaurants');
 const auth = require('./routes/auth');
 const reservation = require('./routes/reservation');
+
 const allowedOrigins = [
   'http://localhost:3000',
   'https://thorn-mod-restaurant.vercel.app'
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    console.log("Request from origin:", origin);
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-}));
+app.use(cors());
 
 
 
